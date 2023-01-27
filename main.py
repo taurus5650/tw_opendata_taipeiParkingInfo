@@ -43,7 +43,7 @@ class Solution:
     """
 
     def Questions1(self, carParkingQuantities: int, motorParkingQuantities: int):
-        # 列出 car 和 motor 小於 5 的停車格數
+
         for result in self.respLoads['data']['park']:
             car = int(result['totalcar'])
             motor = int(result['totalmotor'])
@@ -70,7 +70,6 @@ class Solution:
         print(f"Total Parking Quantities of Car AND Motor   : {finalSum}")
 
     def Questions3(self, topNo: int):
-        # 列出 car 和 motor 相加總數，列出最高 5 名
 
         carMotorList = []
         N = topNo
