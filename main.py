@@ -131,7 +131,7 @@ class Solution:
 
 if __name__ == "__main__":
     solution = Solution()
-    print("----- ----- Q1 列出 car 和 motor 小於 5 的停車格數 ----- -----")
+    print("----- ----- Q1 列出 car 和 motor 小於 5 的停車格數 ----- -----\n")
     solution.Questions1(carParkingQuantities=5, motorParkingQuantities=5)
     print("\n----- ----- Q2 列出 area 的 car 和 motor 總停車格數 ----- -----")
     solution.Questions2(areaParking='南港區')
