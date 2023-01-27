@@ -46,9 +46,16 @@ class Solution:
         for result in self.respLoads['data']['park']:
             car = int(result['totalcar'])
             motor = int(result['totalmotor'])
+            name = str(result['name'])
             if car <= carParkingQuantities and motor <= motorParkingQuantities:
+                print(textwrap.dedent('''\
+                    Total Car   : {car}     |   Total Motor : {motor}   | Parking Name    : {name}\
+                ''').format(
+                    name=name,
+                    car=car,
+                    motor=motor, end=''
+                ))
                 # print(json.dumps(result, indent=2, ensure_ascii=False))
-                print(result)
 
     def Questions2(self, areaParking: str):
 
@@ -65,14 +72,13 @@ class Solution:
                 motorSum += motor
         finalSum = carSum + motorSum
 
-        print(textwrap.dedent(
-            f"""
+        print(textwrap.dedent('''
                 Area                                        : {areaParking}
                 Total Parking Quantities of Car             : {carSum}
                 Total Parking Quantities of Motor           : {motorSum}
                 Total Parking Quantities of Car AND Motor   : {finalSum}
 
-            """).format(
+            ''').format(
             areaParking=areaParking,
             carSum=carSum,
             motorSum=motorSum,
@@ -108,11 +114,11 @@ class Solution:
                 'Car Parking Quantity   ': f"{finalPrint[3]}",
                 'Motor Parking Quantity ': f"{finalPrint[4]}"
             }
-            print(textwrap.dedent(
-                """
+            print(textwrap.dedent('''\
                 {content}
-                """
-            ).format(content=''.join([f"\n {key}: {val}" for key, val in information.items()])))
+                ''').format(
+                content=''.join([f"\n {key}: {val}" for key, val in information.items()]))
+            )
 
         """
         # Pretty print method 2
@@ -125,7 +131,7 @@ class Solution:
 
 if __name__ == "__main__":
     solution = Solution()
-    print("----- ----- Q1 列出 car 和 motor 小於 5 的停車格數 ----- -----\n\n")
+    print("----- ----- Q1 列出 car 和 motor 小於 5 的停車格數 ----- -----")
     solution.Questions1(carParkingQuantities=5, motorParkingQuantities=5)
     print("\n----- ----- Q2 列出 area 的 car 和 motor 總停車格數 ----- -----")
     solution.Questions2(areaParking='南港區')
