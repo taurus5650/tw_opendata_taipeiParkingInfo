@@ -3,7 +3,7 @@ api : https://tcgbusfs.blob.core.windows.net/blobtcmsv/TCMSV_alldesc.json
 dataset : https://data.gov.tw/dataset/128435
 
 1. 列出 car 和 motor 小於 5 的停車格數
-2. 列出每個 area  的 car 和 motor 總停車格數
+2. 列出 area 的 car 和 motor 總停車格數
 3. 列出 car 和 motor 相加總數，列出最高 5 名
 """
 
@@ -16,7 +16,6 @@ class Solution:
     url = "https://tcgbusfs.blob.core.windows.net/blobtcmsv/TCMSV_alldesc.json"
     resp = requests.get(url=url)
     respLoads = json.loads(resp.text)
-
     """
     format_headers = lambda d: '\n'.join(f'{k}: {v}' for k, v in d.items())
     print(textwrap.dedent('''
@@ -48,7 +47,8 @@ class Solution:
             car = int(result['totalcar'])
             motor = int(result['totalmotor'])
             if car <= carParkingQuantities and motor <= motorParkingQuantities:
-                print(json.dumps(result, indent=2, ensure_ascii=False))
+                # print(json.dumps(result, indent=2, ensure_ascii=False))
+                print(result)
 
     def Questions2(self, areaParking: str):
 
@@ -65,9 +65,19 @@ class Solution:
                 motorSum += motor
         finalSum = carSum + motorSum
 
-        print(f"Total Parking Quantities of Car             : {carSum}")
-        print(f"Total Parking Quantities of Motor           : {motorSum}")
-        print(f"Total Parking Quantities of Car AND Motor   : {finalSum}")
+        print(textwrap.dedent(
+            f"""
+                Area                                        : {areaParking}
+                Total Parking Quantities of Car             : {carSum}
+                Total Parking Quantities of Motor           : {motorSum}
+                Total Parking Quantities of Car AND Motor   : {finalSum}
+
+            """).format(
+            areaParking=areaParking,
+            carSum=carSum,
+            motorSum=motorSum,
+            finalSum=finalSum
+        ))
 
     def Questions3(self, topNo: int):
 
@@ -117,7 +127,7 @@ if __name__ == "__main__":
     solution = Solution()
     print("----- ----- Q1 列出 car 和 motor 小於 5 的停車格數 ----- -----\n\n")
     solution.Questions1(carParkingQuantities=5, motorParkingQuantities=5)
-    print("\n----- ----- Q2 列出每個 area  的 car 和 motor 總停車格數 ----- -----\n\n")
-    solution.Questions2(areaParking='松山區')
-    print("\n----- ----- Q3 列出 car 和 motor 相加總數，列出最高 5 名 ----- -----")
+    print("\n----- ----- Q2 列出 area 的 car 和 motor 總停車格數 ----- -----")
+    solution.Questions2(areaParking='南港區')
+    print("----- ----- Q3 列出 car 和 motor 相加總數，列出最高 5 名 ----- -----")
     solution.Questions3(topNo=5)
